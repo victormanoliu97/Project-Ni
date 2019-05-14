@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DefaultNamespace
 {
-    public class AuthKeys
+    public class AuthKey
     {
         [Key]
         public int KeyId { get; set; }
