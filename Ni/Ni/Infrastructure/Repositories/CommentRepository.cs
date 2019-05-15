@@ -2,6 +2,7 @@
 using Ni.Core.Entities;
 using Ni.Repositories;
 using System.Linq;
+using System;
 
 namespace Ni.Infrastructure.Repositories
 {
@@ -22,6 +23,7 @@ namespace Ni.Infrastructure.Repositories
                 UserId = userId,
                 ParentCommentId = parentCommentId,
                 Text = content,
+                Date = DateTime.UtcNow,
             };
             _appDbContext.Comments.Add(newComment);
             _appDbContext.SaveChanges();
