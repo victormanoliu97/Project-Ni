@@ -46,6 +46,13 @@ namespace Ni
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Ni", Version = "v1" }); });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -65,6 +72,7 @@ namespace Ni
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ni V1"); });
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

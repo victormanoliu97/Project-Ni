@@ -13,15 +13,13 @@ import {AddPostRequest} from '../../models/posts/addPostRequest';
 })
 export class PostService {
 
-  postsUrl = 'post/';
-  postIdUrl = 'post/Id/';
-  postLatestUrl = 'post/Latest/';
-  postsAllUrl = 'post/All/';
+  private postsUrl = 'post/';
+  private postIdUrl = 'post/Id/';
+  private postLatestUrl = 'post/Latest/';
+  private postsAllUrl = 'post/All/';
 
-  constructor(public appStateService: AppStateService,
-              public serverService: ServerService,
+  constructor(public serverService: ServerService,
               public http: HttpClient) {
-    this.appStateService = appStateService;
     this.serverService = serverService;
     this.http = http;
   }
