@@ -1,6 +1,6 @@
 <h1>{{post.post.title}}</h1>
 <p>{{post.post.text}}</p>
-<span *ngFor="let tag of post.tags"><span style="color: #007700; cursor: pointer" (click)="clickOnTag(tag)">{{tag}}</span></span>
+<span *ngFor="let tag of post.tags"><span style="color: #007700; cursor: pointer" (click)="clickOnTag(tag)"> |{{tag}}| </span></span>
 <br/>
 <a href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
 <br/>
