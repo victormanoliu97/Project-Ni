@@ -11,7 +11,7 @@ import {GenericResponse} from '../../models/genericResponse';
 export class AuthService {
 
     registerUrl = 'api/accounts';
-    loginUrl = 'api/auth';
+    loginUrl = 'Auth';
 
     constructor(public serverService: ServerService,
                 public http: HttpClient) {
@@ -19,9 +19,9 @@ export class AuthService {
         this.http = http;
     }
 
-    async login(username: string, password: string) {
+    async login(email: string, password: string) {
         const request = new AuthRequest();
-        request.username = username;
+        request.email = email;
         request.password = password;
 
         return this.http.get<AuthResponse>(this.serverService.mainServerUrl + this.loginUrl, {

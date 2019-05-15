@@ -30,7 +30,7 @@ export class CommentComponent implements OnInit {
     }
 
     async loadComments() {
-        const commentsResponse = await this.commentService.getCommentsByParentComment(this.postId,this.comment.comment.id);
+        const commentsResponse = await this.commentService.getCommentsByParentComment(this.postId, this.comment.comment.id);
         this.subComments = commentsResponse.comments;
     }
 

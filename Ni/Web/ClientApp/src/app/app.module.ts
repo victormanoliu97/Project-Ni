@@ -20,14 +20,14 @@ import {AuthModule} from './auth/auth.module';
         PostListComponent,
         PostComponent,
         CommentComponent,
-        LoginComponent,
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         FormsModule,
         NgbModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AuthModule
     ],
     providers: [AuthModule],
     bootstrap: [AppComponent]
