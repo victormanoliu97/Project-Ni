@@ -11,8 +11,7 @@ namespace Ni.Infrastructure
         {
             public DbSet<User> Users { get; set; }
             public DbSet<AuthKey> AuthKeys { get; set; }
-            public DbSet<Commentary> Commentaries { get; set; }
-            public DbSet<PostCommentary> PostCommentaries { get; set; }
+            public DbSet<Comment> Commentaries { get; set; }
             public DbSet<Tag> Tags { get; set; }
             public DbSet<Post> Posts { get; set; }
 

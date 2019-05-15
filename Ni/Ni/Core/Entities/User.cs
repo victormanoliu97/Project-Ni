@@ -6,7 +6,7 @@ namespace Ni.Core.Entities
     public class User
     {
         [Key]
-        public int UserId { get; set; }
+        public int Id { get; set; }
         
         [Required]
         public string Email { get; set; }

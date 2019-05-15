@@ -42,7 +42,7 @@ namespace Ni.Infrastructure.Repositories
         public User GetUserById(int id)
         {
             var query = from entity in _appDbContext.Users
-                        where entity.UserId == id
+                        where entity.Id == id
                         select entity;
             var result = query.ToList();
             if (result.Count == 1)

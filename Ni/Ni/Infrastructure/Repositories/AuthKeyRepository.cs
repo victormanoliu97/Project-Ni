@@ -23,7 +23,7 @@ namespace Ni.Infrastructure.Repositories
             string hash = SHAHasher.ComputeSha256Hash(RandomStringGenerator.CreateString(256));
             AuthKey authKey = new AuthKey()
             {
-                UserId = user.UserId,
+                UserId = user.Id,
                 Key = hash
             };
             _appDbContext.AuthKeys.Add(authKey);

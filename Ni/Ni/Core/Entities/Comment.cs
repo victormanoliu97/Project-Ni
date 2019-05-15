@@ -1,17 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Ni.Core.Entities
 {
-    public class PostCommentary
+    public class Comment
     {
         [Key]
         public int Id { get; set; }
         [ForeignKey("Post")]
+        [Required]
         public int PostId { get; set; }
         [Required]
-        [ForeignKey("Commentary")]
-        public int CommentaryId { get; set; }
+        public string Text { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace Ni.Core.Entities
     public class AuthKey
     {
         [Key]
-        public int KeyId { get; set; }
+        public int Id { get; set; }
         
         [Required]
         [ForeignKey("User")]
