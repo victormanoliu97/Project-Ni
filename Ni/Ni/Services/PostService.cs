@@ -1,8 +1,11 @@
-﻿using Ni.Core.Entities;
+﻿using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+using Ni.Core.Entities;
 using Ni.Core.Requests;
 using Ni.Core.Responses;
 using Ni.Core.Services;
 using Ni.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,6 +45,13 @@ namespace Ni.Services
                     _tagRepository.AddToPost(postId, tag);
                 }
                 response.StatusCode = 200;
+                string connString = "DefaultEndpointsProtocol=https;AccountName=timefunctionnip8ca1;AccountKey=yexSIebMMLZTojXbWS6QSvSOEoxXIqQW3l9oNjfpjdwVRrQKYgMQj1cgrrU7aHnVygp+TQPRsGoeq1UkWaxkUw==;EndpointSuffix=core.windows.net";
+                CloudStorageAccount.TryParse(connString, out var storageAccount);
+                var cloudBlobClient = storageAccount.CreateCloudBlobClient();
+                var container = cloudBlobClient.GetContainerReference("files");
+                var cloudBlockBlob = container.GetBlockBlobReference(postId + ".png");
+                byte[] imageBytes = Convert.FromBase64String(request.Image);
+                cloudBlockBlob.UploadFromByteArray(imageBytes, 0, imageBytes.Length);
             }
             return response;
         }
