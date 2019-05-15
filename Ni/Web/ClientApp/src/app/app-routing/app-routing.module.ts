@@ -12,7 +12,18 @@ const routes: Routes = [
   {
     path: 'panel',
     component: CommentComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '*',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
+
 ];
 
 @NgModule({
