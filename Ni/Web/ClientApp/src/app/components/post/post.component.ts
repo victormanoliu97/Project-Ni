@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostDTO} from '../../models/posts/postDTO';
+import {CommentService} from '../../services/comment/comment.service';
+import {CommentDTO} from '../../models/comments/commentDTO';
 
 @Component({
     selector: 'app-post',
@@ -9,11 +11,26 @@ import {PostDTO} from '../../models/posts/postDTO';
 export class PostComponent implements OnInit {
 
     @Input() post: PostDTO;
+    commentsExtended = false;
+    comments: CommentDTO[];
 
-    constructor() {
+    constructor(public commentService: CommentService) {
+        this.commentService = commentService;
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+    }
+
+    async loadComments() {
+        const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
+        this.comments = commentsResponse.comments;
+    }
+
+    async onExtendClick() {
+        this.commentsExtended = !this.commentsExtended;
+        if (this.commentsExtended) {
+            this.loadComments();
+        }
     }
 
 }

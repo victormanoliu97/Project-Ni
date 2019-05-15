@@ -39,7 +39,7 @@ export class CommentService {
         request.postId = postId;
         request.parentCommentId = parentCommentId;
         request.content = content;
-        return this.http.post<GenericResponse>(this.serverService.mainServerUrl + this.postsUrl, request,
+        return this.http.post<GenericResponse>(this.serverService.mainServerUrl + this.subUrl, request,
             {headers: this.serverService.requestHeaders}).toPromise();
     }
 
@@ -56,7 +56,7 @@ export class CommentService {
         const request = new GetCommentsByParentCommentRequest();
         request.postId = postId;
         request.parentCommentId = parentCommentId;
-        return this.http.get<GetCommentsResponse>(this.serverService.mainServerUrl + this.postsUrl, {
+        return this.http.get<GetCommentsResponse>(this.serverService.mainServerUrl + this.subUrl, {
             params: request as any,
             headers: this.serverService.requestHeaders
         }).toPromise();

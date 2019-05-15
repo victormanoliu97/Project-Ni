@@ -1,3 +1,7 @@
-<p>
-    comment works!
-</p>
+<h6>Level: {{level}}</h6>
+<h3>{{comment.username}}</h3>
+<h6>{{comment.comment.text}}</h6>
+<h6>{{comment.subComments}} Subcomments</h6>
+<div *ngFor="let comment of subComments">
+    <app-comment [style]="safeStyle" [comment]="comment" [postId]="postId" [level]="level + 1"></app-comment>
+</div>

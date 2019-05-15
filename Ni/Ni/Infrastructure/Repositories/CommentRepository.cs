@@ -50,7 +50,7 @@ namespace Ni.Infrastructure.Repositories
         public List<Comment> GetByPostId(int postId)
         {
             var query = from entity in _appDbContext.Comments
-                        where entity.PostId == postId
+                        where entity.PostId == postId && entity.ParentCommentId == 0
                         select entity;
             return query.ToList();
         }

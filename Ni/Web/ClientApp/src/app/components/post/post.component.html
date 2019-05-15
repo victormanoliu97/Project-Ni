@@ -3,4 +3,11 @@
 <span *ngFor="let tag of post.tags"><a href="tag/{{tag}}">{{tag}}</a></span>
 <br/>
 <a href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
-<h2>Comments:</h2>
+<br/>
+<button (click)="onExtendClick()">Extend Comments</button>
+<div *ngIf="commentsExtended">
+    <h2>Comments:</h2>
+    <div *ngFor="let comment of comments">
+        <app-comment  [comment]="comment" [postId]="post.post.id" [level]="0"></app-comment>
+    </div>
+</div>
