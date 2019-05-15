@@ -1,0 +1,6 @@
+<h1>{{post.post.title}}</h1>
+<p>{{post.post.text}}</p>
+<span *ngFor="let tag of post.tags"><a href="tag/{{tag}}">{{tag}}</a></span>
+<br/>
+<a href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
+<h2>Comments:</h2>
