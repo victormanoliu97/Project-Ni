@@ -11,7 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Ni.Core.Services;
 using Ni.Infrastructure;
+using Ni.Infrastructure.Repositories;
+using Ni.Repositories;
+using Ni.Services;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Ni
@@ -30,6 +34,12 @@ namespace Ni
         {
             services.AddDbContext<AppDbContext>();
             services.AddScoped<DbContext, AppDbContext>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAuthKeyRepository, AuthKeyRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Ni", Version = "v1" }); });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
