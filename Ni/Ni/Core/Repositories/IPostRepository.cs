@@ -5,9 +5,9 @@ namespace Ni.Repositories
 {
     public interface IPostRepository
     {
-        void AddPost(Post post);
+        void AddPost(int userId, string title, string content);
         Post GetPostById(int id);
-        List<Post> GetLatest(int count);
+        List<Post> GetLatest(int start, int count);
         List<Post> GetAll();
     }
 }
