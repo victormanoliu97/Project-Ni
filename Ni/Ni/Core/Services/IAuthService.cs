@@ -3,8 +3,8 @@ using Ni.Core.Responses;
 
 namespace Ni.Core.Services
 {
-    public interface IUserService
+    public interface IAuthService
     {
-        GenericResponse AddUser(AddUserRequest request);
+        AuthResponse Auth(AuthRequest request);
     }
 }
