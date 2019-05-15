@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PostDTO} from '../../models/posts/postDTO';
 import {CommentService} from '../../services/comment/comment.service';
 import {CommentDTO} from '../../models/comments/commentDTO';
+import {BingService} from '../../services/bing/bing.service';
 
 @Component({
     selector: 'app-post',
@@ -14,7 +15,8 @@ export class PostComponent implements OnInit {
     commentsExtended = false;
     comments: CommentDTO[];
 
-    constructor(public commentService: CommentService) {
+    constructor(public commentService: CommentService,
+                public bingService: BingService) {
         this.commentService = commentService;
     }
 
@@ -31,6 +33,11 @@ export class PostComponent implements OnInit {
         if (this.commentsExtended) {
             this.loadComments();
         }
+    }
+
+    async clickOnTag(tag: string) {
+        const response = await this.bingService.bingSearch(tag);
+        window.open(response['webPages']['value'][0]['url']);
     }
 
 }

@@ -3,6 +3,7 @@ import {AuthResponse} from '../../models/auth/authResponse';
 import {AuthService} from '../auth/auth.service';
 import {PostDTO} from '../../models/posts/postDTO';
 import {PostService} from '../post/post.service';
+import {BingService} from '../bing/bing.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class AppStateService {
     posts: PostDTO[] = [];
 
     constructor(public authService: AuthService,
-                public postService: PostService) {
+                public postService: PostService,
+                public bingService: BingService) {
         this.authService = authService;
         this.postService = postService;
 
@@ -25,5 +27,7 @@ export class AppStateService {
         this.posts = this.posts.concat(postsResponse.posts);
         console.log(this.posts);
         console.log(postsResponse);
+        const bingResponse = await this.bingService.bingSearch('Corn');
+        console.log(bingResponse);
     }
 }
