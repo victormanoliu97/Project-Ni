@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
     constructor(public commentService: CommentService,
                 public bingService: BingService) {
         this.commentService = commentService;
+        this.bingService = bingService;
     }
 
     async ngOnInit() {
