@@ -13,7 +13,7 @@ import {GetPostResponse} from '../../models/posts/getPostResponse';
 })
 export class PostService {
 
-    private postsUrl = 'post/';
+    private postsUrl = 'Post';
     private postIdUrl = 'post/Id/';
     private postLatestUrl = 'post/Latest/';
     private postsAllUrl = 'post/All/';
