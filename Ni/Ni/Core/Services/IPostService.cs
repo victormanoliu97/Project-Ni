@@ -12,4 +12,11 @@ namespace Ni.Core.Services
         GetPostsResponse GetLatest(GetLatestPostsRequest request);
         GetPostsResponse GetAll(GetAllPostsRequest request);
     }
+    public interface ICommentService
+    {
+        GenericResponse AddComment(AddCommentRequest request);
+        GenericResponse AddSubComment(AddSubCommentRequest request);
+        GetCommentsResponse GetCommentsByPost(GetCommentsByPostRequest request);
+        GetCommentsResponse GetCommentsByParentComment(GetCommentsByParentCommentRequest request);
+    }
 }

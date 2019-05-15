@@ -19,7 +19,7 @@ namespace Ni.Infrastructure.Repositories
             Tag newTag = new Tag()
             {
                 PostId = postId,
-                Title = tag,
+                Content = tag,
             };
             _appDbContext.Tags.Add(newTag);
             _appDbContext.SaveChanges();

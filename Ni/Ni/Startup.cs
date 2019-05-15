@@ -38,10 +38,13 @@ namespace Ni
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAuthKeyRepository, AuthKeyRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Ni", Version = "v1" }); });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

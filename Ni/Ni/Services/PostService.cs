@@ -3,22 +3,25 @@ using Ni.Core.Requests;
 using Ni.Core.Responses;
 using Ni.Core.Services;
 using Ni.Repositories;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ni.Services
 {
     public class PostService : IPostService
     {
-        //private IUserRepository _userRepository;
         private IAuthKeyRepository _authKeyRepository;
         private IPostRepository _postRepository;
+        private ITagRepository _tagRepository;
+        private IUserRepository _userRepository;
 
-        public PostService(IPostRepository postRepository,IUserRepository userRepository, IAuthKeyRepository authKeyRepository)
+        public PostService(IPostRepository postRepository, IAuthKeyRepository authKeyRepository,
+            ITagRepository tagRepository, IUserRepository userRepository)
         {
             _postRepository = postRepository;
             _authKeyRepository = authKeyRepository;
-            //_userRepository = userRepository;
+            _tagRepository = tagRepository;
+            _userRepository = userRepository;
         }
 
         public GenericResponse AddPost(AddPostRequest request)
@@ -33,7 +36,11 @@ namespace Ni.Services
             }
             else
             {
-                _postRepository.AddPost(request.RequesterId, request.Title, request.Content);
+                int postId = _postRepository.AddPost(request.RequesterId, request.Title, request.Content);
+                foreach (var tag in request.Tags)
+                {
+                    _tagRepository.AddToPost(postId, tag);
+                }
                 response.StatusCode = 200;
             }
             return response;
@@ -44,7 +51,24 @@ namespace Ni.Services
             GetPostsResponse response = new GetPostsResponse();
             response.StatusCode = 200;
             response.Errors = new List<string>();
-            response.Posts = _postRepository.GetAll();
+            response.Posts = new List<PostDTO>();
+            var posts = _postRepository.GetAll();
+            foreach (var post in posts)
+            {
+                var tags = new List<string>();
+                var tagEntities = _tagRepository.GetByPostId(post.Id);
+                foreach (var tag in tagEntities)
+                {
+                    tags.Add(tag.Content);
+                }
+                PostDTO postWithTags = new PostDTO()
+                {
+                    Post = post,
+                    Tags = tags,
+                    AuthorUsername = _userRepository.GetUserById(post.UserId).Username,
+                };
+                response.Posts.Add(postWithTags);
+            }
             return response;
         }
 
@@ -53,7 +77,24 @@ namespace Ni.Services
             GetPostsResponse response = new GetPostsResponse();
             response.StatusCode = 200;
             response.Errors = new List<string>();
-            response.Posts = _postRepository.GetLatest(request.Start,request.Count);
+            response.Posts = new List<PostDTO>();
+            var posts = _postRepository.GetLatest(request.Start,request.Count);
+            foreach (var post in posts)
+            {
+                var tags = new List<string>();
+                var tagEntities = _tagRepository.GetByPostId(post.Id);
+                foreach (var tag in tagEntities)
+                {
+                    tags.Add(tag.Content);
+                }
+                PostDTO postWithTags = new PostDTO()
+                {
+                    Post = post,
+                    Tags = tags,
+                    AuthorUsername = _userRepository.GetUserById(post.UserId).Username,
+                };
+                response.Posts.Add(postWithTags);
+            }
             return response;
         }
 
@@ -62,7 +103,19 @@ namespace Ni.Services
             GetPostResponse response = new GetPostResponse();
             response.StatusCode = 200;
             response.Errors = new List<string>();
-            response.Post = _postRepository.GetPostById(request.PostId);
+            var tags = new List<string>();
+            var tagEntities = _tagRepository.GetByPostId(request.PostId);
+            foreach (var tag in tagEntities)
+            {
+                tags.Add(tag.Content);
+            }
+            var post = _postRepository.GetPostById(request.PostId);
+            response.Post = new PostDTO()
+            {
+                Post = post,
+                Tags = tags,
+                AuthorUsername = _userRepository.GetUserById(post.UserId).Username,
+            };
             return response;
         }
     }

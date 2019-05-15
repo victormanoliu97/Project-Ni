@@ -15,7 +15,7 @@ namespace Ni.Infrastructure.Repositories
             _appDbContext = appDbContext;
         }
 
-        public void AddPost(int userId, string title, string content)
+        public int AddPost(int userId, string title, string content)
         {
             Post newPost = new Post()
             {
@@ -26,6 +26,7 @@ namespace Ni.Infrastructure.Repositories
             };
             _appDbContext.Posts.Add(newPost);
             _appDbContext.SaveChanges();
+            return newPost.Id;
         }
 
         public List<Post> GetAll()
