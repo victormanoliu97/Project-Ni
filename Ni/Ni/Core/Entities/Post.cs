@@ -16,6 +16,7 @@ namespace Ni.Core.Entities
         public string Title { get; set; }
         [Required]
         public string Text { get; set; }
+        [Required]
         public DateTime Date { get; set; }
     }
 }
