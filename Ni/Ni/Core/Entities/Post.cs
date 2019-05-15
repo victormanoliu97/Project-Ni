@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DefaultNamespace
+namespace Ni.Core.Entities
 {
     public class Post
     {

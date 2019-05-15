@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DefaultNamespace
+namespace Ni.Core.Entities
 {
     public class User
     {

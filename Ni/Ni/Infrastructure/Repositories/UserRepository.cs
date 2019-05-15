@@ -1,4 +1,4 @@
-using DefaultNamespace;
+using Ni.Core.Entities;
 using Ni.Repositories;
 using System.Linq;
 
