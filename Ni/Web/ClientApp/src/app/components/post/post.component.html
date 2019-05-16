@@ -5,9 +5,30 @@
 <a href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
 <br/>
 <button (click)="onExtendClick()">Extend Comments</button>
+<button type="button" class="btn-primary" (click)="open(content)">Add Comment</button>
 <div *ngIf="commentsExtended">
     <h2>Comments:</h2>
     <div *ngFor="let comment of comments">
         <app-comment  [comment]="comment" [postId]="post.post.id" [level]="0"></app-comment>
     </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Post</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="commentContent">Content</label>
+      <div class="input-group">
+        <input type="text" id="commentContent" class="form-control mb-4" placeholder="Title" [(ngModel)]="postContentText">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100%;" (click)="addPostComment(post.post.id, postContentText)">Save Comment</button>
+  </div>
+</ng-template>

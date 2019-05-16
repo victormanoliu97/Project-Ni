@@ -3,5 +3,26 @@
 <h6>{{comment.comment.text}}</h6>
 <h6>{{comment.subComments}} Subcomments</h6>
 <div *ngFor="let comment of subComments">
+    <button type="button" class="btn-primary" (click)="open(content)">Add SubComment</button>
     <app-comment [style]="safeStyle" [comment]="comment" [postId]="postId" [level]="level + 1"></app-comment>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Post</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="commentContent">Content</label>
+      <div class="input-group">
+        <input type="text" id="commentContent" class="form-control mb-4" placeholder="Title">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" style="width: 100%;">Save Comment</button>
+  </div>
+</ng-template>

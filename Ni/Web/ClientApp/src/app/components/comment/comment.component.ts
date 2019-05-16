@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from '../../services/comment/comment.service';
 import {CommentDTO} from '../../models/comments/commentDTO';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-comment',
@@ -16,9 +17,10 @@ export class CommentComponent implements OnInit {
     subComments: CommentDTO[];
     cssstyle: string;
     safeStyle: SafeStyle;
+    closeResult: string;
 
     constructor(public commentService: CommentService,
-                public domSanitizer: DomSanitizer) {
+                public domSanitizer: DomSanitizer, private modalService: NgbModal) {
         this.commentService = commentService;
         this.domSanitizer = domSanitizer;
     }
@@ -33,5 +35,23 @@ export class CommentComponent implements OnInit {
         const commentsResponse = await this.commentService.getCommentsByParentComment(this.postId, this.comment.comment.id);
         this.subComments = commentsResponse.comments;
     }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
 }
