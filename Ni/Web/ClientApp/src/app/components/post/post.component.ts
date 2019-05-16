@@ -27,6 +27,7 @@ export class PostComponent implements OnInit {
     constructor(public commentService: CommentService,
                 public bingService: BingService,
                 public aiTextService: AiTextService,
+                public timeService: TimeService,
                 private modalService: NgbModal,
                 public appStateService: AppStateService) {
         this.commentService = commentService;
