@@ -14,18 +14,23 @@
       <div class="input-group">
         <input type="text" id="postTitle" class="form-control mb-4" placeholder="Title" [(ngModel)]="postTitle">
       </div>
+      <div class="image-upload">
+      <input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)"/>
+    </div>
       <label for="postContent">Text</label>
       <div class="input-group">
         <input type="text" id="postContent" class="form-control mb-4" placeholder="Content" [(ngModel)]="postContent">
       </div>
-      <label for="tags">Tags</label>
       <div class="input-group">
-        <input type="text" id="tags" class="form-control mb-4" placeholder="Tags" [(ngModel)]="postTags">
+        <button (click)="postTagsList.push({tag: ''})">Add Tag</button>
+        <div *ngFor="let singleTag of postTagsList">
+          <input type="text" class="form-control mb-4" placeholder="Tag" [(ngModel)]="singleTag.tag">
+        </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="addPost(postTitle, postContent, postTags)" style="width: 100%;">Save</button>
+    <button type="button" class="btn btn-success" (click)="addPost(postTitle, postContent)" style="width: 100%;">Save</button>
   </div>
 </ng-template>
 

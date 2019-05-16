@@ -9,7 +9,6 @@ import {HomeComponent} from './components/home/home.component';
 import {PostListComponent} from './components/post-list/post-list.component';
 import {PostComponent} from './components/post/post.component';
 import {CommentComponent} from './components/comment/comment.component';
-import { LoginComponent } from './auth/login/login.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AuthModule} from './auth/auth.module';
 

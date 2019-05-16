@@ -1,21 +1,24 @@
-import {Component} from '@angular/core';
 import {AppStateService} from '../../services/app-state/app-state.service';
 import {PostService} from '../../services/post/post.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GenericResponse} from '../../models/genericResponse';
+import {Tag} from './tag';
+
+import {Component} from '@angular/core';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
+  selector: 'app-home',
+  templateUrl: './home.component.html',
 })
+
 export class HomeComponent {
 
   closeResult: string;
   postTitle: string;
   postContent: string;
-  postTags: string;
-  postTagsList: string[] = [];
+  postTagsList: Tag[] = [];
   postRequestResponse: GenericResponse;
+  private imageSrc = '';
 
     constructor(public appStateService: AppStateService, private postService: PostService, private modalService: NgbModal) {
         this.appStateService = appStateService;
@@ -30,6 +33,24 @@ export class HomeComponent {
     });
   }
 
+  handleInputChange(e) {
+    // tslint:disable-next-line:prefer-const
+    const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    const pattern = /image-*/;
+    const reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
+    }
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsBinaryString(file);
+  }
+  _handleReaderLoaded(e) {
+    const reader = e.target;
+    this.imageSrc = reader.result;
+    console.log(this.imageSrc);
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -40,10 +61,13 @@ export class HomeComponent {
     }
   }
 
-  async addPost(postTitle: string, postContent: string, postTags: string) {
-      this.postTagsList.push(postTags);
+  async addPost(postTitle: string, postContent: string) {
+      const tags = [];
+      for (const tag of this.postTagsList) {
+        tags.push(tag.tag);
+      }
       this.postRequestResponse = await this.postService.addPost(this.appStateService.auth.userId, this.appStateService.auth.authKey,
-        postTitle, postContent, this.postTagsList);
+        postTitle, btoa(this.imageSrc), postContent, tags);
   }
 
 }

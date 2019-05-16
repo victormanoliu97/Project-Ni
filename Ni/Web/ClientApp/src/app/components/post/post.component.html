@@ -1,4 +1,5 @@
 <h1>{{post.post.title}}</h1>
+<img [src]="'https://timefunctionnip8ca1.blob.core.windows.net/files/' + post.post.id + '.png'">
 <p>{{post.post.text}}</p>
 <span *ngFor="let tag of post.tags"><span style="color: #007700; cursor: pointer" (click)="clickOnTag(tag)"> |{{tag}}| </span></span>
 <br/>

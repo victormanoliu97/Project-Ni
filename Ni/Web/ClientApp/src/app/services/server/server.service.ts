@@ -16,5 +16,6 @@ export class ServerService {
     });
 
     constructor() {
+        // this.mainServerUrl = 'https://localhost:5001/api/';
     }
 }

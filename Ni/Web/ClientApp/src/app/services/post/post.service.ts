@@ -24,11 +24,12 @@ export class PostService {
         this.http = http;
     }
 
-    async addPost(requesterId: number, authKey: string, title: string, content: string, tags: string[]) {
+    async addPost(requesterId: number, authKey: string, title: string, image: string, content: string, tags: string[]) {
         const request = new AddPostRequest();
         request.requesterId = requesterId;
         request.authKey = authKey;
         request.title = title;
+        request.image = image;
         request.content = content;
         request.tags = tags;
         return this.http.post<GenericResponse>(this.serverService.mainServerUrl + this.postsUrl, request,
