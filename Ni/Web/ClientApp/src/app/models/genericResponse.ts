@@ -5,3 +5,10 @@ export class GenericResponse {
 export class BingSerachRequest {
     q: string;
 }
+export class AiTextRequest {
+    documents: AiTextDoc[];
+}
+export class AiTextDoc {
+    id: string;
+    text: string;
+}

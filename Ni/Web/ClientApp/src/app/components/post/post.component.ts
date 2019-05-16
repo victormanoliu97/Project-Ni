@@ -6,6 +6,7 @@ import {BingService} from '../../services/bing/bing.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GenericResponse} from '../../models/genericResponse';
 import {AppStateService} from '../../services/app-state/app-state.service';
+import {AiTextService} from '../../services/ai-text/ai-text.service';
 
 @Component({
     selector: 'app-post',
@@ -20,15 +21,21 @@ export class PostComponent implements OnInit {
     closeResult: string;
     addCommentRequestResponse: GenericResponse;
     postContentText: string;
+    language: string;
 
     constructor(public commentService: CommentService,
-                public bingService: BingService, private modalService: NgbModal, public appStateService: AppStateService) {
+                public bingService: BingService,
+                public aiTextService: AiTextService,
+                private modalService: NgbModal,
+                public appStateService: AppStateService) {
         this.commentService = commentService;
         this.bingService = bingService;
+        this.aiTextService = aiTextService;
         this.appStateService = appStateService;
     }
 
     async ngOnInit() {
+        await this.getTextLanguage();
     }
 
     async loadComments() {
@@ -75,6 +82,12 @@ export class PostComponent implements OnInit {
           this.appStateService.auth.userId,
           this.appStateService.auth.authKey);
       console.log(response);
+  }
+
+  async getTextLanguage() {
+        const response = await this.aiTextService.textSearch(this.post.post.text);
+        console.log(response);
+        this.language = response['documents'][0]['detectedLanguages'][0]['name'];
   }
 
 }
