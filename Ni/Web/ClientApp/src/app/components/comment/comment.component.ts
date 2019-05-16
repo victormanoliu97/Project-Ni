@@ -3,6 +3,7 @@ import {CommentService} from '../../services/comment/comment.service';
 import {CommentDTO} from '../../models/comments/commentDTO';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AppStateService} from '../../services/app-state/app-state.service';
 
 @Component({
     selector: 'app-comment',
@@ -18,11 +19,15 @@ export class CommentComponent implements OnInit {
     cssstyle: string;
     safeStyle: SafeStyle;
     closeResult: string;
+    postContentText: string;
 
     constructor(public commentService: CommentService,
+                public appStateService: AppStateService,
                 public domSanitizer: DomSanitizer, private modalService: NgbModal) {
         this.commentService = commentService;
+        this.appStateService = appStateService;
         this.domSanitizer = domSanitizer;
+        this.modalService = modalService;
     }
 
     async ngOnInit() {
@@ -53,5 +58,15 @@ export class CommentComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+    async addSubComment() {
+        const response = await this.commentService.addSubcomment(
+            this.appStateService.auth.userId,
+            this.appStateService.auth.authKey,
+            this.postId, this.comment.comment.id, this.postContentText);
+        console.log(
+            this.appStateService.auth.userId,
+            this.appStateService.auth.authKey);
+        console.log(response);
+    }
 
 }

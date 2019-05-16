@@ -66,11 +66,15 @@ export class PostComponent implements OnInit {
     }
   }
 
-  async addPostComment(postId: number, content: string) {
-      this.addCommentRequestResponse = await this.commentService.addCommentToPost(
+  async addPostComment() {
+      const response = await this.commentService.addCommentToPost(
         this.appStateService.auth.userId,
         this.appStateService.auth.authKey,
-        postId, content);
+        this.post.post.id, this.postContentText);
+      console.log(
+          this.appStateService.auth.userId,
+          this.appStateService.auth.authKey);
+      console.log(response);
   }
 
 }

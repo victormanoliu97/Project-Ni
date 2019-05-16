@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.authResponse = await this.authService.login(userName, password);
     if (this.authResponse != null) {
       this.stateService.auth = this.authResponse;
-      console.log('Muie Paius ' + this.stateService.auth);
+      console.log(this.stateService.auth);
       this.router.navigate(['panel']);
     }
   }
