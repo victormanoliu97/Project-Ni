@@ -4,4 +4,5 @@ export class Comment {
     postId: number;
     parentCommentId: number;
     text: string;
+    date: string;
 }

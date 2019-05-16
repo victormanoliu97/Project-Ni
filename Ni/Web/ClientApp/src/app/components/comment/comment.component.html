@@ -1,6 +1,7 @@
 <h6>Level: {{level}}</h6>
 <h3>{{comment.username}}</h3>
 <h6>{{comment.comment.text}}</h6>
+<h6> {{comment.comment.date}}</h6>
 <h6>{{comment.subComments}} Subcomments</h6>
 <button type="button" class="btn-primary" (click)="open(content)">Add SubComment</button>
 <div *ngFor="let comment of subComments">
