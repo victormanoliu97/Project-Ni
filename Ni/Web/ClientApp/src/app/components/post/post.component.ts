@@ -6,6 +6,7 @@ import {BingService} from '../../services/bing/bing.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {GenericResponse} from '../../models/genericResponse';
 import {AppStateService} from '../../services/app-state/app-state.service';
+import {TimeService} from '../../services/time/time.service';
 
 @Component({
     selector: 'app-post',
@@ -22,10 +23,13 @@ export class PostComponent implements OnInit {
     postContentText: string;
 
     constructor(public commentService: CommentService,
-                public bingService: BingService, private modalService: NgbModal, public appStateService: AppStateService) {
+                public bingService: BingService, private modalService: NgbModal,
+                public appStateService: AppStateService,
+                public timeService: TimeService) {
         this.commentService = commentService;
         this.bingService = bingService;
         this.appStateService = appStateService;
+        this.timeService = timeService;
     }
 
     async ngOnInit() {
@@ -33,6 +37,10 @@ export class PostComponent implements OnInit {
 
     async loadComments() {
         const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
+        for (const entry of commentsResponse.comments) {
+          const responsePromise = await this.timeService.getTime();
+          entry.comment.Date = responsePromise.requestResponse;
+        }
         this.comments = commentsResponse.comments;
     }
 
