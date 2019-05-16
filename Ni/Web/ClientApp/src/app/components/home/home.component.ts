@@ -20,7 +20,7 @@ export class HomeComponent {
   postRequestResponse: GenericResponse;
   private imageSrc = '';
 
-    constructor(public appStateService: AppStateService, private postService: PostService, private modalService: NgbModal) {
+    constructor(public appStateService: AppStateService, public postService: PostService, private modalService: NgbModal) {
         this.appStateService = appStateService;
         this.postService = postService;
     }
