@@ -44,8 +44,7 @@ export class PostComponent implements OnInit {
     async loadComments() {
         const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
         for (const entry of commentsResponse.comments) {
-          const responsePromise = await this.timeService.getTime();
-          entry.comment.Date = responsePromise.requestResponse;
+          entry.comment.date = await this.timeService.getTime();
         }
         this.comments = commentsResponse.comments;
     }
