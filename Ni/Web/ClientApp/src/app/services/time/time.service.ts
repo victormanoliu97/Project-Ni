@@ -32,7 +32,8 @@ export class TimeService {
 
     return this.http.get(this.timeUrl, {
       responseType: 'text',
-      params: request as any
+      params: request as any,
+      headers: this.serverService.requestHeaders,
     }).toPromise();
   }
 }
