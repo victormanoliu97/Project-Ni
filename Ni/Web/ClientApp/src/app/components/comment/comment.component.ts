@@ -23,7 +23,7 @@ export class CommentComponent implements OnInit {
 
     constructor(public commentService: CommentService,
                 public appStateService: AppStateService,
-                public domSanitizer: DomSanitizer, public modalService: NgbModal) {
+                public domSanitizer: DomSanitizer, private modalService: NgbModal) {
         this.commentService = commentService;
         this.appStateService = appStateService;
         this.domSanitizer = domSanitizer;

@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
                 public bingService: BingService,
                 public aiTextService: AiTextService,
                 public timeService: TimeService,
-                public modalService: NgbModal,
+                private modalService: NgbModal,
                 public appStateService: AppStateService) {
         this.commentService = commentService;
         this.bingService = bingService;
@@ -44,8 +44,7 @@ export class PostComponent implements OnInit {
     async loadComments() {
         const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
         for (const entry of commentsResponse.comments) {
-          const responsePromise = await this.timeService.getTime();
-          entry.comment.date = responsePromise;
+          entry.comment.date = await this.timeService.getTime();
         }
         this.comments = commentsResponse.comments;
     }
