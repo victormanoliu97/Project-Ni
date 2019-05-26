@@ -6,6 +6,7 @@ import {PostService} from '../post/post.service';
 import {BingService} from '../bing/bing.service';
 import {AiTextService} from '../ai-text/ai-text.service';
 import {CookieService} from 'ngx-cookie-service';
+import {GetPostsResponse} from '../../models/posts/getPostsResponse';
 
 @Injectable({
     providedIn: 'root'
