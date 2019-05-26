@@ -11,6 +11,7 @@ import {Categories} from '../../models/category/categories';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent {
@@ -25,7 +26,7 @@ export class HomeComponent {
   category: string;
 
     constructor(public appStateService: AppStateService, private postService: PostService,
-                private modalService: NgbModal, public route: ActivatedRoute) {
+                private modalService: NgbModal, public route: ActivatedRoute, public router: Router) {
         this.appStateService = appStateService;
         this.postService = postService;
         this.categories = new Categories();
@@ -46,6 +47,10 @@ export class HomeComponent {
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
+    }
+
+    goTo(str: string) {
+        window.location.assign(str);
     }
 
     handleInputChange(e) {

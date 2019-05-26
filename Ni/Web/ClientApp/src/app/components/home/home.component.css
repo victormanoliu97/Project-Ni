@@ -1,0 +1,10 @@
+.cat {
+    background-color: dodgerblue;
+    color: white;
+    transition-duration: 0.25s;
+}
+.cat:hover {
+    background-color: white;
+    color: dodgerblue;
+    transition-duration: 0.25s;
+}
