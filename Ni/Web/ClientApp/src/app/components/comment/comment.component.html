@@ -1,11 +1,12 @@
-<h6>Level: {{level}}</h6>
-<h3>{{comment.username}}</h3>
-<h6>{{comment.comment.text}}</h6>
-<h6> {{comment.comment.date}}</h6>
-<h6>{{comment.subComments}} Subcomments</h6>
-<button type="button" class="btn-primary" (click)="open(content)">Add SubComment</button>
-<div *ngFor="let comment of subComments">
-    <app-comment [style]="safeStyle" [comment]="comment" [postId]="postId" [level]="level + 1"></app-comment>
+<div class="ui-g ui-fluid ui-g-nopad">
+<h5 class="ui-g-9 ui-g-nopad">{{comment.username}}</h5>
+  <h6 class="ui-g-3 ui-g-nopad" style="text-align: right"> {{dateToString(comment.comment.date)}}</h6>
+<p class="ui-g-12 ui-g-nopad">{{comment.comment.text}}</p>
+  <button class="ui-g-3 ui-g-nopad" type="button" class="btn-primary" (click)="open(content)"><i class="fas fa-plus"></i></button>
+<div class="ui-g-12 ui-g-nopad" *ngFor="let comment of subComments">
+  <div class="ui-g-1 ui-g-nopad" style="height: 100%"></div>
+  <app-comment class="ui-g-11 ui-g-nopad" [style]="safeStyle" [comment]="comment" [postId]="postId" [level]="level + 1"></app-comment>
+</div>
 </div>
 
 <ng-template #content let-modal>

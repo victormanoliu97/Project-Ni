@@ -69,4 +69,10 @@ export class CommentComponent implements OnInit {
         console.log(response);
     }
 
+    dateToString(str: string) {
+        const date = new Date(str.split('.')[0].replace('T', ' '));
+        console.log(date);
+        return date.toDateString() + date.toTimeString();
+    }
+
 }

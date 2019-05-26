@@ -9,7 +9,7 @@
     <span class="ui-g-12 ui-g-nopad" style="color: #007700; cursor: pointer;" *ngFor="let tag of post.tags" (click)="clickOnTag(tag)">{{tag}}</span>
   </div>
 <a class="ui-g-2 ui-g-nopad" style="text-align: right; height: 1em" href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
-<div *ngIf="commentsExtended">
+<div class="ui-g-12 ui-g-nopad" *ngIf="commentsExtended">
     <h2>Comments:</h2>
     <div *ngFor="let comment of comments">
         <app-comment  [comment]="comment" [postId]="post.post.id" [level]="0"></app-comment>

@@ -25,8 +25,6 @@ export class TimeService {
       currentDate.getMinutes() + ':' + currentDate.getSeconds() + '.' +
       currentDate.getMilliseconds();
 
-    console.log(dateStr);
-
     request.Date = dateStr;
     request.TimeZone = '-10';
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PostDTO} from '../../models/posts/postDTO';
 import {CommentService} from '../../services/comment/comment.service';
 import {CommentDTO} from '../../models/comments/commentDTO';
@@ -17,6 +17,8 @@ import {TimeService} from '../../services/time/time.service';
 export class PostComponent implements OnInit {
 
     @Input() post: PostDTO;
+    // tslint:disable-next-line:no-output-on-prefix
+    @Output() onSelect = new EventEmitter<PostDTO>();
     commentsExtended = false;
     comments: CommentDTO[];
     closeResult: string;
@@ -43,9 +45,9 @@ export class PostComponent implements OnInit {
 
     async loadComments() {
         const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
-        for (const entry of commentsResponse.comments) {
-          entry.comment.date = await this.timeService.getTime();
-        }
+        // for (const entry of commentsResponse.comments) {
+          // entry.comment.date = await this.timeService.getTime();
+        // }
         this.comments = commentsResponse.comments;
     }
 

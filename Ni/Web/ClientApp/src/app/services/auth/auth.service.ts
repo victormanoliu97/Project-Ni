@@ -30,9 +30,10 @@ export class AuthService {
         }).toPromise();
     }
 
-    async register(email: string, password: string) {
+    async register(email: string, username: string, password: string) {
         const request = new RegisterRequest();
         request.email = email;
+        request.username = username;
         request.password = password;
         return this.http.post<GenericResponse>(this.serverService.mainServerUrl + this.registerUrl, request,
             {headers: this.serverService.requestHeaders}).toPromise();
