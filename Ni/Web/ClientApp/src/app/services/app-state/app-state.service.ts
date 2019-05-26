@@ -5,6 +5,7 @@ import {PostDTO} from '../../models/posts/postDTO';
 import {PostService} from '../post/post.service';
 import {BingService} from '../bing/bing.service';
 import {AiTextService} from '../ai-text/ai-text.service';
+import {GetPostsResponse} from '../../models/posts/getPostsResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -25,10 +26,11 @@ export class AppStateService {
     }
 
     async loadAppState(category: string = '') {
+        let postsResponse: GetPostsResponse;
         if (category !== '') {
-            const postsResponse = await this.postService.getAllPostsByCategory(category);
+            postsResponse = await this.postService.getAllPostsByCategory(category);
         } else {
-            const postsResponse = await this.postService.getAllPosts();
+            postsResponse = await this.postService.getAllPosts();
         }
         this.posts = this.posts.concat(postsResponse.posts);
         console.log(this.posts);
