@@ -5,11 +5,12 @@ import {GenericResponse} from '../../models/genericResponse';
 import {Tag} from './tag';
 
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent {
@@ -23,7 +24,7 @@ export class HomeComponent {
   category: string;
 
     constructor(public appStateService: AppStateService, private postService: PostService,
-                private modalService: NgbModal, public route: ActivatedRoute) {
+                private modalService: NgbModal, public route: ActivatedRoute, public router: Router) {
         this.appStateService = appStateService;
         this.postService = postService;
       this.route.url.subscribe(params => {
@@ -43,6 +44,10 @@ export class HomeComponent {
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
+    }
+
+    goTo(str: string) {
+        window.location.assign(str);
     }
 
     handleInputChange(e) {

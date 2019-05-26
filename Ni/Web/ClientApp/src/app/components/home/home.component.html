@@ -1,4 +1,9 @@
-<div class="ui-g ui-fluid ui-g-nopad">
+<div class="ui-g ui-fluid ui-g-nopad" style="text-align: center">
+    <div class="cat ui-g-12" (click)="goTo('panel')"><i class="fas fa-home"></i></div>
+        <div class="cat ui-sm-12 ui-md-6 ui-xl-3" (click)="goTo('c/music')"><i class="fas fa-music"></i></div>
+        <div class="cat ui-sm-12 ui-md-6 ui-xl-3" (click)="goTo('c/books')"><i class="fas fa-book"></i></div>
+        <div class="cat ui-sm-12 ui-md-6 ui-xl-3" (click)="goTo('c/dank')"><i class="fas fa-grin-squint-tears"></i></div>
+        <div class="cat ui-sm-12 ui-md-6 ui-xl-3" (click)="goTo('c/unicredit')"><i class="fas fa-poo"></i></div>
     <button (click)="open(content)" class="btn-primary ui-g-12" type="button">Add Post</button>
     <app-post-list class="ui-g-12" [posts]="appStateService.posts"></app-post-list>
 </div>
