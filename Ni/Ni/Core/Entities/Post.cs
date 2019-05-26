@@ -9,6 +9,9 @@ namespace Ni.Core.Entities
     {
         [Key]
         public int Id { get; set; }
+        [ForeignKey("Category")]
+        [Required]
+        public int CategoryId { get; set; }
         [ForeignKey("User")]
         [Required]
         public int UserId { get; set; }
@@ -19,4 +22,5 @@ namespace Ni.Core.Entities
         [Required]
         public DateTime Date { get; set; }
     }
+
 }

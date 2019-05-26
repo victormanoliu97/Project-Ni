@@ -17,14 +17,16 @@ namespace Ni.Services
         private IPostRepository _postRepository;
         private ITagRepository _tagRepository;
         private IUserRepository _userRepository;
+        private ICategoryRepository _categoryRepository;
 
         public PostService(IPostRepository postRepository, IAuthKeyRepository authKeyRepository,
-            ITagRepository tagRepository, IUserRepository userRepository)
+            ITagRepository tagRepository, IUserRepository userRepository, ICategoryRepository categoryRepository)
         {
             _postRepository = postRepository;
             _authKeyRepository = authKeyRepository;
             _tagRepository = tagRepository;
             _userRepository = userRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public GenericResponse AddPost(AddPostRequest request)
@@ -63,6 +65,39 @@ namespace Ni.Services
             response.Errors = new List<string>();
             response.Posts = new List<PostDTO>();
             var posts = _postRepository.GetAll();
+            foreach (var post in posts)
+            {
+                var tags = new List<string>();
+                var tagEntities = _tagRepository.GetByPostId(post.Id);
+                foreach (var tag in tagEntities)
+                {
+                    tags.Add(tag.Content);
+                }
+                PostDTO postWithTags = new PostDTO()
+                {
+                    Post = post,
+                    Tags = tags,
+                    AuthorUsername = _userRepository.GetUserById(post.UserId).Username,
+                };
+                response.Posts.Add(postWithTags);
+            }
+            return response;
+        }
+
+        public GetPostsResponse GetAllByCategory(GetAllPostsByCategoryRequest request)
+        {
+            GetPostsResponse response = new GetPostsResponse();
+            response.StatusCode = 200;
+            response.Errors = new List<string>();
+            response.Posts = new List<PostDTO>();
+            var cat = _categoryRepository.GetCategoryByUrl(request.CategoryURL);
+            if(cat == null)
+            {
+                response.StatusCode = 404;
+                response.Errors.Add("Category not found");
+                return response;
+            }
+            var posts = _postRepository.GetByCategory(cat.Id);
             foreach (var post in posts)
             {
                 var tags = new List<string>();

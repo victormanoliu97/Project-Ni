@@ -36,6 +36,14 @@ namespace Ni.Infrastructure.Repositories
             return query.ToList();
         }
 
+        public List<Post> GetByCategory(int categoryId)
+        {
+            var query = from entity in _appDbContext.Posts
+                        where entity.CategoryId == categoryId
+                        select entity;
+            return query.ToList();
+        }
+
         public List<Post> GetLatest(int start, int count)
         {
             var query = from entity in _appDbContext.Posts

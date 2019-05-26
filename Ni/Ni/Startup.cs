@@ -35,6 +35,7 @@ namespace Ni
             services.AddDbContext<AppDbContext>();
             services.AddScoped<DbContext, AppDbContext>();
 
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAuthKeyRepository, AuthKeyRepository>();
             services.AddTransient<IPostRepository, PostRepository>();

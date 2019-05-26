@@ -41,5 +41,11 @@ namespace Ni.Controllers
         {
             return Json(_postService.GetAll(request));
         }
+        [HttpGet]
+        [Route("Category")]
+        public JsonResult GetAllByCategory([FromQuery] GetAllPostsByCategoryRequest request)
+        {
+            return Json(_postService.GetAllByCategory(request));
+        }
     }
 }

@@ -9,5 +9,10 @@ namespace Ni.Repositories
         Post GetPostById(int id);
         List<Post> GetLatest(int start, int count);
         List<Post> GetAll();
+        List<Post> GetByCategory(int categoryId);
+    }
+    public interface ICategoryRepository
+    {
+        Category GetCategoryByUrl(string url);
     }
 }
