@@ -5,7 +5,7 @@ import {PostDTO} from '../../models/posts/postDTO';
 import {PostService} from '../post/post.service';
 import {BingService} from '../bing/bing.service';
 import {AiTextService} from '../ai-text/ai-text.service';
-import {GetPostsResponse} from '../../models/posts/getPostsResponse';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,11 +18,13 @@ export class AppStateService {
     constructor(public authService: AuthService,
                 public postService: PostService,
                 public bingService: BingService,
-                public aiTextService: AiTextService) {
+                public aiTextService: AiTextService,
+                public cookieService: CookieService) {
         this.authService = authService;
         this.postService = postService;
         this.postService = postService;
         this.aiTextService = aiTextService;
+        this.cookieService = cookieService;
     }
 
     async loadAppState(category: string = '') {
@@ -37,5 +39,13 @@ export class AppStateService {
         console.log(postsResponse);
         const textResponse = await this.aiTextService.textSearch('Corn');
         console.log(textResponse);
+    }
+
+    async setCookie(cookieName: string, cookieValue: string) {
+      this.cookieService.set(cookieName, cookieValue);
+    }
+
+    async getCookie(cookieName: string) {
+      return this.cookieService.get(cookieName);
     }
 }

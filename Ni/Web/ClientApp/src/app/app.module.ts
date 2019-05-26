@@ -11,6 +11,7 @@ import {PostComponent} from './components/post/post.component';
 import {CommentComponent} from './components/comment/comment.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {AuthModule} from './auth/auth.module';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [
@@ -26,9 +27,9 @@ import {AuthModule} from './auth/auth.module';
         FormsModule,
         NgbModule,
         AppRoutingModule,
-        AuthModule
+        AuthModule,
     ],
-    providers: [AuthModule],
+    providers: [AuthModule, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

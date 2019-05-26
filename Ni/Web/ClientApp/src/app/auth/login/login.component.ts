@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {AuthResponse} from '../../models/auth/authResponse';
 import {AppStateService} from '../../services/app-state/app-state.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
     password: string;
 
 
-    constructor(private authService: AuthService, private router: Router, public stateService: AppStateService) {
+    constructor(private authService: AuthService, private router: Router,
+                public stateService: AppStateService) {
     }
 
     ngOnInit() {
@@ -26,6 +28,8 @@ export class LoginComponent implements OnInit {
         this.authResponse = await this.authService.login(userName, password);
         if (this.authResponse != null) {
             this.stateService.auth = this.authResponse;
+            this.stateService.setCookie('userId', String(this.stateService.auth.userId));
+            this.stateService.setCookie('authKey', this.stateService.auth.authKey);
             console.log(this.stateService.auth);
             this.router.navigate(['panel']);
         }
