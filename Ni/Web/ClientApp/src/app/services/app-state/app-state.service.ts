@@ -22,12 +22,14 @@ export class AppStateService {
         this.postService = postService;
         this.postService = postService;
         this.aiTextService = aiTextService;
-
-        this.loadAppState();
     }
 
-    async loadAppState() {
-        const postsResponse = await this.postService.getAllPosts();
+    async loadAppState(category: string = '') {
+        if (category !== '') {
+            const postsResponse = await this.postService.getAllPostsByCategory(category);
+        } else {
+            const postsResponse = await this.postService.getAllPosts();
+        }
         this.posts = this.posts.concat(postsResponse.posts);
         console.log(this.posts);
         console.log(postsResponse);

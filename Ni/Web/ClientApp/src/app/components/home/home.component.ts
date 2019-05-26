@@ -29,7 +29,10 @@ export class HomeComponent {
       this.route.url.subscribe(params => {
         if (params[1] !== undefined) {
           this.category = params[1].path;
+          appStateService.loadAppState(this.category);
           console.log('Router param ' + params[1].path);
+        } else {
+            appStateService.loadAppState();
         }
       });
     }

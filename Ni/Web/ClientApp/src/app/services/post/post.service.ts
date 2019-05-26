@@ -7,6 +7,7 @@ import {GetPostByIdRequest} from '../../models/posts/getPostByIdRequest';
 import {GenericResponse} from '../../models/genericResponse';
 import {AddPostRequest} from '../../models/posts/addPostRequest';
 import {GetPostResponse} from '../../models/posts/getPostResponse';
+import {GetAllPostsByCategoryRequest} from '../../models/posts/getAllPostsByCategoryRequest';
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ export class PostService {
     private postIdUrl = 'post/Id/';
     private postLatestUrl = 'post/Latest/';
     private postsAllUrl = 'post/All/';
+    private postsAllCategoryUrl = 'post/Category/';
 
     constructor(public serverService: ServerService,
                 public http: HttpClient) {
@@ -38,6 +40,14 @@ export class PostService {
 
     async getAllPosts() {
         return this.http.get<GetPostsResponse>(this.serverService.mainServerUrl + this.postsAllUrl, {
+            headers: this.serverService.requestHeaders
+        }).toPromise();
+    }
+    async getAllPostsByCategory(category: string) {
+        const request = new GetAllPostsByCategoryRequest();
+        request.categoryURL = category;
+        return this.http.get<GetPostsResponse>(this.serverService.mainServerUrl + this.postsAllCategoryUrl, {
+            params: request as any,
             headers: this.serverService.requestHeaders
         }).toPromise();
     }

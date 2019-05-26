@@ -1,5 +1,8 @@
-<button (click)="open(content)" class="btn-primary" type="button">Add Post</button>
-<app-post-list [posts]="appStateService.posts"></app-post-list>
+<div class="ui-g ui-fluid ui-g-nopad">
+    <button (click)="open(content)" class="btn-primary ui-g-12" type="button">Add Post</button>
+    <app-post-list class="ui-g-12" [posts]="appStateService.posts"></app-post-list>
+</div>
+
 
 <ng-template #content let-modal>
     <div class="modal-header">

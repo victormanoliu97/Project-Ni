@@ -15,13 +15,14 @@ namespace Ni.Infrastructure.Repositories
             _appDbContext = appDbContext;
         }
 
-        public int AddPost(int userId, string title, string content)
+        public int AddPost(int userId, int categoryId, string title, string content)
         {
             Post newPost = new Post()
             {
                 UserId = userId,
                 Title = title,
                 Text = content,
+                CategoryId = categoryId,
                 Date = DateTime.UtcNow,
             };
             _appDbContext.Posts.Add(newPost);

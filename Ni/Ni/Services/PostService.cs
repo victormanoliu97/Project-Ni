@@ -41,7 +41,7 @@ namespace Ni.Services
             }
             else
             {
-                int postId = _postRepository.AddPost(request.RequesterId, request.Title, request.Content);
+                int postId = _postRepository.AddPost(request.RequesterId, request.CategoryId, request.Title, request.Content);
                 foreach (var tag in request.Tags)
                 {
                     _tagRepository.AddToPost(postId, tag);
