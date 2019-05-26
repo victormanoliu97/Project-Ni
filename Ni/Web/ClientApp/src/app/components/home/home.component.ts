@@ -5,6 +5,7 @@ import {GenericResponse} from '../../models/genericResponse';
 import {Tag} from './tag';
 
 import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -13,16 +14,24 @@ import {Component} from '@angular/core';
 
 export class HomeComponent {
 
-    closeResult: string;
-    postTitle: string;
-    postContent: string;
-    postTagsList: Tag[] = [];
-    postRequestResponse: GenericResponse;
-    private imageSrc = '';
+  closeResult: string;
+  postTitle: string;
+  postContent: string;
+  postTagsList: Tag[] = [];
+  postRequestResponse: GenericResponse;
+  private imageSrc = '';
+  category: string;
 
-    constructor(public appStateService: AppStateService, private postService: PostService, private modalService: NgbModal) {
+    constructor(public appStateService: AppStateService, private postService: PostService,
+                private modalService: NgbModal, public route: ActivatedRoute) {
         this.appStateService = appStateService;
         this.postService = postService;
+      this.route.url.subscribe(params => {
+        if (params[1] !== undefined) {
+          this.category = params[1].path;
+          console.log('Router param ' + params[1].path);
+        }
+      });
     }
 
     open(content) {
