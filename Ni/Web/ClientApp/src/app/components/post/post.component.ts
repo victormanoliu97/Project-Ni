@@ -17,6 +17,7 @@ import {TimeService} from '../../services/time/time.service';
 export class PostComponent implements OnInit {
 
     @Input() post: PostDTO;
+    @Input() big = false;
     // tslint:disable-next-line:no-output-on-prefix
     @Output() onSelect = new EventEmitter<PostDTO>();
     commentsExtended = false;
@@ -41,6 +42,9 @@ export class PostComponent implements OnInit {
 
     async ngOnInit() {
         await this.getTextLanguage();
+        if (this.big) {
+            this.loadComments();
+        }
     }
 
     async loadComments() {
@@ -52,10 +56,11 @@ export class PostComponent implements OnInit {
     }
 
     async onExtendClick() {
-        this.commentsExtended = !this.commentsExtended;
-        if (this.commentsExtended) {
-            this.loadComments();
-        }
+        this.onSelect.emit(this.post);
+        // this.commentsExtended = !this.commentsExtended;
+        // if (this.commentsExtended) {
+        //     this.loadComments();
+        // }
     }
 
     async clickOnTag(tag: string) {

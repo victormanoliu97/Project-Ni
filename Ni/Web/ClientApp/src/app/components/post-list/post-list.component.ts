@@ -10,6 +10,7 @@ import {AppStateService} from '../../services/app-state/app-state.service';
 export class PostListComponent implements OnInit {
 
     @Input() posts: PostDTO[];
+    selectedPost: PostDTO;
 
     constructor(public appStateService: AppStateService) {
         this.appStateService = appStateService;

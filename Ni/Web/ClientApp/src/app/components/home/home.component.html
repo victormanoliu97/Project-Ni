@@ -1,5 +1,5 @@
-<app-post-list [posts]="appStateService.posts"></app-post-list>
 <button type="button" class="btn-primary" (click)="open(content)">Add Post</button>
+<app-post-list [posts]="appStateService.posts"></app-post-list>
 
 <ng-template #content let-modal>
   <div class="modal-header">

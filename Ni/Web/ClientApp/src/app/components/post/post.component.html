@@ -1,4 +1,4 @@
-<div class="ui-g ui-fluid ui-g-nopad" style="widows: 100%; height: 100%;background-color: #dddddd; border-radius: 10px">
+<div class="ui-g ui-fluid ui-g-nopad" style="background-color: #dddddd; border-radius: 10px">
 <h3 class="ui-g-6 ui-g-nopad">{{post.post.title}}</h3>
 <h3 class="ui-g-6 ui-g-nopad" style="text-align: right; height: 1em">{{language}}</h3>
   <div class="ui-g-3 ui-g-nopad">
@@ -9,7 +9,7 @@
     <span class="ui-g-12 ui-g-nopad" style="color: #007700; cursor: pointer;" *ngFor="let tag of post.tags" (click)="clickOnTag(tag)">{{tag}}</span>
   </div>
 <a class="ui-g-2 ui-g-nopad" style="text-align: right; height: 1em" href="user/{{post.post.userId}}">{{post.authorUsername}}</a>
-<div class="ui-g-12 ui-g-nopad" *ngIf="commentsExtended">
+<div class="ui-g-12 ui-g-nopad" *ngIf="commentsExtended || big">
     <h2>Comments:</h2>
     <div *ngFor="let comment of comments">
         <app-comment  [comment]="comment" [postId]="post.post.id" [level]="0"></app-comment>
@@ -19,9 +19,9 @@
 </div>
 
 <div class="bottom ui-g ui-fluid ui-g-nopad">
-  <button class="ui-g-3 ui-g-nopad" (click)="onExtendClick()"><i class="fas fa-arrows-alt-v"></i></button>
-  <div class="ui-g-6 ui-g-nopad"></div>
-  <button type="button" class="btn-primary ui-g-3"  (click)="open(content)"><i class="fas fa-plus"></i></button></div>
+  <button *ngIf="!big" class="ui-g-3 ui-g-nopad" (click)="onExtendClick()"><i class="fas fa-arrows-alt-v"></i></button>
+  <div class="ui-g-9 ui-g-nopad"></div>
+  <button *ngIf="big" type="button" class="btn-primary ui-g-3"  (click)="open(content)"><i class="fas fa-plus"></i></button></div>
 
 
 <ng-template #content let-modal>
