@@ -1,28 +1,32 @@
 <!-- Default form login -->
 <div class="ui-g ui-fluid ui-g-nopad">
-  <div class="ui-sm-1 ui-md-2 ui-lg-3 ui-xl-4" style="height: 100%"></div>
-<div class="ui-sm-10 ui-md-8 ui-lg-6 ui-xl-4">
+    <div class="ui-sm-1 ui-md-2 ui-lg-3 ui-xl-4" style="height: 100%"></div>
+    <div class="ui-sm-10 ui-md-8 ui-lg-6 ui-xl-4">
 
-  <div class="text-center border border-light p-5">
+        <div class="text-center border border-light p-5">
 
-    <p class="h4 mb-4">Sign in</p>
+            <p class="h4 mb-4">Sign in</p>
 
-    <!-- Email -->
-    <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" [(ngModel)]="userName">
+            <!-- Email -->
+            <input [(ngModel)]="userName" class="form-control mb-4" id="defaultLoginFormEmail" placeholder="E-mail"
+                   type="text">
 
-    <!-- Password -->
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="password">
+            <!-- Password -->
+            <input [(ngModel)]="password" class="form-control mb-4" id="defaultLoginFormPassword" placeholder="Password"
+                   type="password">
 
-    <!-- Sign in button -->
-    <button type="button" class="btn-primary" style="width: 100%;" (click)="getLogin(userName, password)">Sign in</button>
+            <!-- Sign in button -->
+            <button (click)="getLogin(userName, password)" class="btn-primary" style="width: 100%;" type="button">Sign
+                in
+            </button>
 
-    <!-- Register -->
-    <p>Not a member?
-      <a href="register">Register</a>
-    </p>
+            <!-- Register -->
+            <p>Not a member?
+                <a href="register">Register</a>
+            </p>
 
-  </div>
-  <!-- Default form login -->
+        </div>
+        <!-- Default form login -->
 
-</div>
+    </div>
 </div>

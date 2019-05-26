@@ -1,3 +1,3 @@
 export class TimeResponse {
-  requestResponse: string;
+    requestResponse: string;
 }

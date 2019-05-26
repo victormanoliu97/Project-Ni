@@ -1,4 +1,4 @@
 export class TimeRequest {
-  Date: string;
-  TimeZone: string;
+    Date: string;
+    TimeZone: string;
 }

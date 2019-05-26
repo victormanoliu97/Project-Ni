@@ -50,7 +50,7 @@ export class PostComponent implements OnInit {
     async loadComments() {
         const commentsResponse = await this.commentService.getCommentsByPost(this.post.post.id);
         // for (const entry of commentsResponse.comments) {
-          // entry.comment.date = await this.timeService.getTime();
+        // entry.comment.date = await this.timeService.getTime();
         // }
         this.comments = commentsResponse.comments;
     }
@@ -68,39 +68,39 @@ export class PostComponent implements OnInit {
         window.open(response['webPages']['value'][0]['url']);
     }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+    open(content) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
     }
-  }
 
-  async addPostComment() {
-      const response = await this.commentService.addCommentToPost(
-        this.appStateService.auth.userId,
-        this.appStateService.auth.authKey,
-        this.post.post.id, this.postContentText);
-      console.log(
-          this.appStateService.auth.userId,
-          this.appStateService.auth.authKey);
-      console.log(response);
-  }
+    async addPostComment() {
+        const response = await this.commentService.addCommentToPost(
+            this.appStateService.auth.userId,
+            this.appStateService.auth.authKey,
+            this.post.post.id, this.postContentText);
+        console.log(
+            this.appStateService.auth.userId,
+            this.appStateService.auth.authKey);
+        console.log(response);
+    }
 
-  async getTextLanguage() {
+    async getTextLanguage() {
         const response = await this.aiTextService.textSearch(this.post.post.text);
         console.log(response);
         this.language = response['documents'][0]['detectedLanguages'][0]['name'];
-  }
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
+    }
 
 }

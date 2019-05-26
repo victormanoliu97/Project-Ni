@@ -2,10 +2,12 @@ img {
     width: 100%;
     height: auto;
 }
+
 button {
     height: 40px;
 }
+
 .bottom {
-    position:relative;
+    position: relative;
     bottom: 40px;
 }
