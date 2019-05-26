@@ -1,0 +1,14 @@
+<div class="text-center border border-light p-5">
+  <p class="h4 mb-4">Register</p>
+
+  <!-- Email -->
+  <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" [(ngModel)]="email">
+
+  <!-- UserName -->
+  <input type="text" id="defaultLoginFormUsername" class="form-control mb-4" placeholder="UserName" [(ngModel)]="userName">
+
+  <!-- Password -->
+  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="password">
+
+  <button type="button" class="btn-primary" style="width: 100%;" (click)="registerUser(email, userName, password)">Register</button>
+</div>

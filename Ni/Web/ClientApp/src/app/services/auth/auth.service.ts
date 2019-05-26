@@ -10,7 +10,7 @@ import {GenericResponse} from '../../models/genericResponse';
 })
 export class AuthService {
 
-    registerUrl = 'api/accounts';
+    registerUrl = 'Accounts';
     loginUrl = 'Auth';
 
     constructor(public serverService: ServerService,
