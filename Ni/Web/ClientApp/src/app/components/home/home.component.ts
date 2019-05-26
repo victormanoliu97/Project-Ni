@@ -5,7 +5,7 @@ import {GenericResponse} from '../../models/genericResponse';
 import {Tag} from './tag';
 
 import {Component} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Categories} from '../../models/category/categories';
 
 @Component({
