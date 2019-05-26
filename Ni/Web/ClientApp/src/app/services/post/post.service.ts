@@ -26,7 +26,9 @@ export class PostService {
         this.http = http;
     }
 
-    async addPost(requesterId: number, authKey: string, title: string, image: string, content: string, tags: string[]) {
+    async addPost(requesterId: number, authKey: string, title: string, image: string, content: string, tags: string[], categoryId: number) {
+      console.log(requesterId);
+      console.log(authKey);
         const request = new AddPostRequest();
         request.requesterId = requesterId;
         request.authKey = authKey;
@@ -34,6 +36,7 @@ export class PostService {
         request.image = image;
         request.content = content;
         request.tags = tags;
+        request.categoryId = categoryId;
         return this.http.post<GenericResponse>(this.serverService.mainServerUrl + this.postsUrl, request,
             {headers: this.serverService.requestHeaders}).toPromise();
     }

@@ -5,4 +5,5 @@ export class AddPostRequest extends GenericLoggedInRequest {
     content: string;
     tags: string[];
     image: string;
+    categoryId: number;
 }

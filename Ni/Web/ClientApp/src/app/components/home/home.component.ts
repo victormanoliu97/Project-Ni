@@ -6,6 +6,7 @@ import {Tag} from './tag';
 
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Categories} from '../../models/category/categories';
 
 @Component({
     selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent {
   postContent: string;
   postTagsList: Tag[] = [];
   postRequestResponse: GenericResponse;
+  categories: Categories;
   private imageSrc = '';
   category: string;
 
@@ -26,6 +28,7 @@ export class HomeComponent {
                 private modalService: NgbModal, public route: ActivatedRoute) {
         this.appStateService = appStateService;
         this.postService = postService;
+        this.categories = new Categories();
       this.route.url.subscribe(params => {
         if (params[1] !== undefined) {
           this.category = params[1].path;
@@ -69,8 +72,12 @@ export class HomeComponent {
         for (const tag of this.postTagsList) {
             tags.push(tag.tag);
         }
-        this.postRequestResponse = await this.postService.addPost(this.appStateService.auth.userId, this.appStateService.auth.authKey,
-            postTitle, btoa(this.imageSrc), postContent, tags);
+        const categoryId = this.categories.categoriesDictionary[this.category];
+        const userId = Number( await this.appStateService.getCookie('userId'));
+        const authKey = String( await this.appStateService.getCookie('authKey'));
+
+        this.postRequestResponse = await this.postService.addPost(userId, authKey,
+            postTitle, btoa(this.imageSrc), postContent, tags, categoryId);
     }
 
     private getDismissReason(reason: any): string {
